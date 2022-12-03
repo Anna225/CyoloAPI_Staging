@@ -17,7 +17,7 @@ namespace LawyerAPI.Controllers
 
         // GET: api/Presentations/2021-1155-A
         [HttpGet("GetByCourtCaseNo/{courtcaseno}")]
-        public async Task<ActionResult<IEnumerable<dynamic>>> GetAvailableLawyersByCourtCaseNo(int courtcaseno)
+        public async Task<ActionResult<IEnumerable<dynamic>>?> GetAvailableLawyersByCourtCaseNo(int courtcaseno)
         {
             var lawyers = (from presentation in _context.Presentations
                            join lawyer in _context.Lawyers
@@ -29,7 +29,7 @@ namespace LawyerAPI.Controllers
 
             if (lawyers == null)
             {
-                return NotFound();
+                return null;
             }
             return await lawyers.ToListAsync();
 
