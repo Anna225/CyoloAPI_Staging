@@ -1,0 +1,30 @@
+﻿using Microsoft.EntityFrameworkCore;
+namespace LawyerAPI.Models
+{
+    public class LawyerDbContext : DbContext
+    {
+        public LawyerDbContext(DbContextOptions<LawyerDbContext> options)
+            : base(options)
+        {
+        }
+
+        public DbSet<Court> Courts { get; set; } = null!;
+        public DbSet<User> Users { get; set; } = null!;
+        public DbSet<Lawyer> Lawyers { get; set; } = null!;
+        public DbSet<AssignedLawyer> AssignedLawyers { get; set; } = null!;
+        public DbSet<CourtCaseAgenda> CourtCaseAgenda { get; set; } = null!;
+        public DbSet<Presentation> Presentations { get; set; } = null!;
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>().ToTable("Users");
+            modelBuilder.Entity<User>().Property(f => f.ID).ValueGeneratedOnAdd();            
+            modelBuilder.Entity<Court>().ToTable("Courts");
+            modelBuilder.Entity<CourtCaseAgenda>().ToTable("CourtCaseAgendas");
+            modelBuilder.Entity<Lawyer>().ToTable("Lawyers");
+            modelBuilder.Entity<AssignedLawyer>().ToTable("AssignedLawyers");
+            modelBuilder.Entity<Presentation>().ToTable("Presentations");
+        }
+
+    }
+}
