@@ -86,12 +86,12 @@ namespace LawyerAPI.Controllers
                                     .FirstOrDefault();
                 if(courtcase != null)
                 {
-                    var lawyers = (from present in _context.Presentations
+                    var lawyers = (from presentation in _context.Presentations
                                    join lawyer in _context.Lawyers
-                                   on new { id = present.LawyerId, val = present.Available }
+                                   on new { id = presentation.LawyerId, val = presentation.Available }
                                    equals new { id = lawyer.ID, val = 1 }
-                                   where present.CourtCaseNo == courtcase.ID
-                                   select new { lawyer }).Distinct();
+                                   where presentation.CourtCaseNo == courtcase.ID
+                                   select new { lawyer, presentation }).Distinct();
                     if (lawyers == null)
                     {
                         return null;
@@ -114,12 +114,12 @@ namespace LawyerAPI.Controllers
                                     .FirstOrDefault();
                 if (courtcase != null)
                 {
-                    var lawyers = (from present in _context.Presentations
+                    var lawyers = (from presentation in _context.Presentations
                                    join lawyer in _context.Lawyers
-                                   on new { id = present.LawyerId, val = present.Available }
+                                   on new { id = presentation.LawyerId, val = presentation.Available }
                                    equals new { id = lawyer.ID, val = 1 }
-                                   where present.CourtCaseNo == courtcase.ID
-                                   select new { lawyer }).Distinct();
+                                   where presentation.CourtCaseNo == courtcase.ID
+                                   select new { lawyer, presentation }).Distinct();
                     if (lawyers == null)
                     {
                         return null;
