@@ -15,7 +15,7 @@ namespace LawyerAPI.Controllers
             _context = context;
         }
 
-        // GET: api/Presentations/2021-1155-A
+        // GET: api/Presentations/20211155
         [HttpGet("GetByCourtCaseNo/{courtcaseno}")]
         public async Task<ActionResult<IEnumerable<dynamic>>?> GetAvailableLawyersByCourtCaseNo(int courtcaseno)
         {
@@ -25,7 +25,7 @@ namespace LawyerAPI.Controllers
                            equals new { ID = lawyer.ID }
                            where (presentation.CourtCaseNo == courtcaseno) &&
                                    (presentation.Available == 1)
-                           select new { presentation, lawyer }).Distinct();
+                           select new { presentation, lawyer });
 
             if (lawyers == null)
             {
